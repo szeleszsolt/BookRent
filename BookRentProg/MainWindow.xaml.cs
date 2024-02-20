@@ -38,14 +38,45 @@ namespace BookRentProg
 
         private void BTN_Delete_Click(object sender, RoutedEventArgs e)
         {
-            var page = new EditBookPage();
-            MainFrame.Content = page;
-            page.BTN_Cancel.Click += EditBookPage_BTN_Cancel_Click;
+            if(mainPage.LB_Books.SelectedIndex != null)
+            {
+                var result = MessageBox.Show("Biztos, hogy törölni kívánja a kiválasztott elemet?", "Törlés...", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+                if(result == MessageBoxResult.Yes)
+                {
+                    mainPage.LB_Books.Items.Remove(mainPage.LB_Books.SelectedItem);
+                }
+            }
         }
 
         private void BTN_Edit_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            if(mainPage.LB_Books.SelectedItem != null)
+            {
+                var book = (Book)mainPage.LB_Books.SelectedItem;
+                var page = new EditBookPage();
+                page.TB_Author.Text = book.Author;
+                page.TB_Title.Text = book.Title;
+                page.TB_Type.Text = book.Type;
+                page.DP_Publish.SelectedDate = book.Published;
+                page.BTN_Cancel.Click += EditBookPage_BTN_Cancel_Click;
+                page.BTN_Save.Click += EditBookPageBTN_Save_Existing_Click;
+                MainFrame.Content = page;
+
+            }
+            
+
+        }
+
+        private void EditBookPageBTN_Save_Existing_Click(object sender, RoutedEventArgs e)
+        {
+            var page = (EditBookPage)MainFrame.Content;
+            var book = (Book)mainPage.LB_Books.SelectedItem;
+            book.Author = page.TB_Author.Text;
+            book.Title = page.TB_Title.Text;
+            book.Type = page.TB_Type.Text;
+            book.Published = page.DP_Publish.SelectedDate;
+            mainPage.LB_Books.Items.Refresh();
+            MainFrame.Content = mainPage;
         }
 
         private void BTN_New_Click(object sender, RoutedEventArgs e)
@@ -53,6 +84,21 @@ namespace BookRentProg
             var page = new EditBookPage();
             MainFrame.Content = page;
             page.BTN_Cancel.Click += EditBookPage_BTN_Cancel_Click;
+            page.BTN_Save.Click += EditBookPageBTN_Save_New_Click;
+        }
+
+        private void EditBookPageBTN_Save_New_Click(object sender, RoutedEventArgs e)
+        {
+            var page = (EditBookPage)MainFrame.Content;
+            var book = new Book()
+            {
+                Author = page.TB_Author.Text,
+                Title = page.TB_Title.Text,
+                Type = page.TB_Type.Text,
+                Published = page.DP_Publish.SelectedDate,
+            };
+            mainPage.LB_Books.Items.Add(book);
+            MainFrame.Content = mainPage;
         }
 
         private void EditBookPage_BTN_Cancel_Click(object sender, RoutedEventArgs e)

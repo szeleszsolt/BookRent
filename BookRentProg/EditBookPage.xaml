@@ -9,7 +9,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Szerkesztő">
 
-    <Grid Margin="2.5">
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2.5">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
