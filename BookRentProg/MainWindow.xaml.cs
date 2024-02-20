@@ -23,6 +23,41 @@ namespace BookRentProg
         public MainWindow()
         {
             InitializeComponent();
+            mainPage = new MainPage();
+        }
+        private MainPage mainPage;
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = mainPage;
+            mainPage.BTN_New.Click += BTN_New_Click;
+            mainPage.BTN_Edit.Click += BTN_Edit_Click;
+            mainPage.BTN_Delete.Click += BTN_Delete_Click;
+            
+        }
+
+        private void BTN_Delete_Click(object sender, RoutedEventArgs e)
+        {
+            var page = new EditBookPage();
+            MainFrame.Content = page;
+            page.BTN_Cancel.Click += EditBookPage_BTN_Cancel_Click;
+        }
+
+        private void BTN_Edit_Click(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void BTN_New_Click(object sender, RoutedEventArgs e)
+        {
+            var page = new EditBookPage();
+            MainFrame.Content = page;
+            page.BTN_Cancel.Click += EditBookPage_BTN_Cancel_Click;
+        }
+
+        private void EditBookPage_BTN_Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = mainPage;
         }
     }
 }

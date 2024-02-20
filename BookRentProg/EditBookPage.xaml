@@ -36,8 +36,8 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Content="Mentés" Margin="2.5"/>
-            <Button Grid.Column="1" Content="Vissza" Margin="2.5"/>
+            <Button Grid.Column="0" x:Name="BTN_Save" Content="Mentés" Margin="2.5"/>
+            <Button Grid.Column="1" x:Name="BTN_Cancel" Content="Vissza" Margin="2.5"/>
         </Grid>
     </Grid>
 </Page>
